@@ -14,49 +14,72 @@ Modular and production-ready architecture
 
 Designed for scalability and experimentation
 
-🧠 Models Used
+🚀 Core Architecture
+The chatbot operates as a "Cognitive Router," automatically sending tasks to the most efficient model:
 
-Qwen2.5-VL:7B – Vision-language understanding
+Logic & Reasoning: deepseek-r1 (Ollama)
 
-Mistral (latest) – Fast and high-quality conversational reasoning
+Coding & Technical Tasks: qwen3 (Ollama)
 
-Qwen3:8B – Advanced instruction following
+General Conversation: mistral (Ollama)
 
-DeepSeek-R1:7B – Deep analytical reasoning
+Vision (Image Analysis): qwen2.5-vl (Ollama)
 
-Z-Image Turbo – High-performance image processing
+Professional Image Generation: Z-Image-Turbo (Hugging Face API)
 
-🏗 Architecture Overview
-User Input (Text/Image)
-        ↓
-Input Processing
-        ↓
-Model Router
-        ↓
-Selected LLM Inference
-        ↓
-Structured Answer Output
+🛠️ Tech Stack
+Backend: Python 3.10+
 
-🎯 Use Cases
+Local Inference: Ollama (Managing 7B-parameter models)
 
-AI assistants & copilots
+Cloud Inference: Hugging Face Inference API (InferenceClient)
 
-Visual Question Answering (VQA)
+Data Format: JSONL (for self-learning logs)
 
-Research and analytics tools
+Hardware Optimization: FP16 Quantization and CPU Offloading
 
-Decision support systems
+📥 Installation & Setup
+Clone the Repository
 
-🚦 Getting Started
+Bash
 
-Clone the repository
+git clone https://github.com/yourusername/end-to-end-chatbot.git
+cd end-to-end-chatbot
+Pull Local Models (Ollama)
 
-Configure model endpoints or local deployments
+Bash
 
-Run the chatbot service
+ollama pull deepseek-r1:7b
+ollama pull mistral
+ollama pull qwen2.5vl:7b
+Environment Setup Create a .env file and add your Hugging Face Access Token:
 
-Interact via API or UI
+Plaintext
 
-🔮 Vision
+HF_TOKEN=hf_your_token_here
+Install Dependencies
 
-Callisto aims to be a future-ready conversational AI framework, enabling seamless integration and benchmarking of multiple LLMs within a single unified system—without vendor lock-in.
+Bash
+
+pip install ollama huggingface_hub pillow python-dotenv
+🧠 The Self-Learning Loop
+Every interaction is captured in training_data.jsonl. This allows the chatbot to "learn" from its history.
+
+Goal: Use this data for Supervised Fine-Tuning (SFT).
+
+Format:
+
+JSON
+
+{"timestamp": "2026-02-08", "task": "vision", "prompt": "Analyze this soil", "response": "High risk of erosion"}
+🔧 Usage
+Run the main script:
+
+Bash
+
+python main.py
+Text Chat: Just type your message.
+
+Vision: Upload an image when prompted.
+
+Image Gen: Start your prompt with /image.
