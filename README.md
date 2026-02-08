@@ -43,7 +43,7 @@ Clone the Repository
 
 Bash
 
-git clone https://github.com/yourusername/end-to-end-chatbot.git
+git clone https://Harshavarthanan-ctrl/End-to-End-Answering-Chatbot.git
 cd end-to-end-chatbot
 Pull Local Models (Ollama)
 
